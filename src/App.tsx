@@ -15,7 +15,7 @@ function App() {
         <TabItem>충전소</TabItem>
         <TabItem>투표</TabItem>
       </Tab>
-      <Swiper spaceBetween={10} slidesPerView={1.2} centeredSlides={true} loop={true}>
+      <StyledSwiper spaceBetween={10} slidesPerView={1.2} centeredSlides={true} loop={true}>
         <StyledSwiperSlide>
           <Banner>
             <BannerImage src="https://picsum.photos/200/200" alt="banner" />
@@ -64,7 +64,23 @@ function App() {
             </BannerContent>
           </Banner>
         </StyledSwiperSlide>
-      </Swiper>
+      </StyledSwiper>
+      <Contents>
+        <Content>
+          <ContentLeft>
+            <ContentImage src="https://picsum.photos/200/200" alt="content" />
+            <ContentRank>1</ContentRank>
+            <ContentTextWrapper>
+              <ContentTitle>Dash</ContentTitle>
+              <ContentText>PLAVE(플레이브)</ContentText>
+            </ContentTextWrapper>
+          </ContentLeft>
+          <ContentRight>
+            <img src="/public/images/svg/favorite.svg" alt="favorite" />
+            <ContentText>79,568</ContentText>
+          </ContentRight>
+        </Content>
+      </Contents>
     </Layout>
   );
 }
@@ -108,6 +124,10 @@ const TabItem = styled.button`
   }
 `;
 
+const StyledSwiper = styled(Swiper)`
+  margin-bottom: 40px;
+`;
+
 const StyledSwiperSlide = styled(SwiperSlide)`
   width: calc(100% - 20px);
 `;
@@ -118,7 +138,7 @@ const Banner = styled.div`
   border-radius: 10px;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border: 1px solid ${({ theme }) => theme.colors.gray_50};
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 `;
 
@@ -164,4 +184,52 @@ const BannerButton = styled.button`
 const BannerDate = styled.p`
   float: right;
   ${({ theme }) => theme.fonts.PRETENDARD_12_400};
+`;
+
+const Contents = styled.div`
+  width: 100%;
+  padding: 0 20px;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ContentLeft = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const ContentImage = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+`;
+
+const ContentRank = styled.p`
+  ${({ theme }) => theme.fonts.PRETENDARD_18_600};
+`;
+
+const ContentTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ContentTitle = styled.p`
+  ${({ theme }) => theme.fonts.PRETENDARD_16_600};
+  color: ${({ theme }) => theme.colors.black};
+`;
+
+const ContentText = styled.p`
+  ${({ theme }) => theme.fonts.PRETENDARD_14_400};
+  color: ${({ theme }) => theme.colors.gray_100};
+`;
+
+const ContentRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
