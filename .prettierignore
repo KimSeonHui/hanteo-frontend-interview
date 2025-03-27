@@ -1,0 +1,13 @@
+.github
+.gitignore
+.npmrc
+.vscode
+
+node_modules
+package.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+tsconfig.json
+
+README.md
+.ticket.yaml
