@@ -1,0 +1,44 @@
+{
+  "banners": [
+    {
+      "id": 1,
+      "title": "가요대제전 투표 이벤트",
+      "startDate": "2025-03-20",
+      "endDate": "2025-04-20",
+      "type": "vote",
+      "thumbnail": "/images/event1.jpg",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 2,
+      "title": "PLAVE 공식 팬클럽 플리 2기 공개모집",
+      "startDate": "2025-03-30",
+      "endDate": "2025-04-30",
+      "type": "fan-club",
+      "thumbnail": "/images/event2.jpg",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 3,
+      "title": "aespa 미니앨범 발매 기념 쇼케이스",
+      "startDate": "2025-04-25",
+      "endDate": "2025-04-25",
+      "type": "showcase",
+      "thumbnail": "/images/event3.jpg",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 4,
+      "title": "SEVENTEEN 팬미팅 'GOING SEVENTEEN'",
+      "startDate": "2025-02-15",
+      "endDate": "2025-03-15",
+      "type": "fan-meeting",
+      "thumbnail": "/images/event4.jpg",
+      "url": "https://www.hanteochart.com/",
+      "status": "ended"
+    }
+  ]
+}

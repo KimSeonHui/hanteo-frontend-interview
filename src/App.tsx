@@ -1,8 +1,12 @@
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useState, useRef } from 'react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import type { Banner, BannerStatus, BannerType } from '@type';
+import { getBanners } from '@api/banner';
 
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 const TAB_LIST = [
   { id: 'chart', name: '차트' },
@@ -17,6 +21,7 @@ const TAB_LIST = [
 function App() {
   const [tab, setTab] = useState('chart');
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const [banners, setBanners] = useState<Banner[]>([]);
 
   const handleTabClick = (id: string) => {
     setTab(id);
@@ -28,6 +33,36 @@ function App() {
       });
     }
   };
+
+  const handleBannerClick = (url: string) => {
+    window.open(url, '_blank');
+  };
+
+  const getBannerButtonText = (type: BannerType) => {
+    switch (type) {
+      case 'vote':
+        return '투표하기';
+      default:
+        return '신청하기';
+    }
+  };
+
+  const getBannerStatusLabel = (status: BannerStatus) => {
+    switch (status) {
+      case 'ongoing':
+        return '진행중';
+      case 'upcoming':
+        return '예정';
+      case 'ended':
+        return '종료';
+    }
+  };
+
+  useEffect(() => {
+    getBanners().then((data) => {
+      setBanners(data.banners);
+    });
+  }, []);
 
   return (
     <Layout>
@@ -45,56 +80,38 @@ function App() {
           </TabItem>
         ))}
       </Tab>
-      <StyledSwiper spaceBetween={10} slidesPerView={1.2} centeredSlides={true} loop={true}>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/200" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/300" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/400" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/500" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-      </StyledSwiper>
+      {banners.length > 0 && (
+        <StyledSwiper
+          spaceBetween={5}
+          slidesPerView={1.1}
+          centeredSlides={true}
+          loop
+          pagination
+          modules={[Pagination, Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+        >
+          {banners.map((banner) => (
+            <StyledSwiperSlide key={banner.id} onClick={() => handleBannerClick(banner.url)}>
+              <Banner>
+                <BannerStatusLabel className={banner.status}>{getBannerStatusLabel(banner.status)}</BannerStatusLabel>
+                <BannerImage src={banner.thumbnail} alt="banner" />
+                <BannerContent>
+                  <BannerTitleRow>
+                    <BannerTitle>{banner.title}</BannerTitle>
+                    <BannerButton>{getBannerButtonText(banner.type)}</BannerButton>
+                  </BannerTitleRow>
+                  <BannerDate>
+                    {banner.startDate} ~ {banner.endDate}(KST)
+                  </BannerDate>
+                </BannerContent>
+              </Banner>
+            </StyledSwiperSlide>
+          ))}
+        </StyledSwiper>
+      )}
       <Contents>
         <Content>
           <ContentLeft>
@@ -132,7 +149,7 @@ const Tab = styled.ul`
   align-items: center;
   gap: 30px;
   padding: 15px 30px;
-  background-color: ${({ theme }) => theme.colors.pink};
+  background-color: ${({ theme }) => theme.colors.pink_50};
   overflow-x: auto;
   margin-bottom: 20px;
 
@@ -155,7 +172,15 @@ const TabItem = styled.button`
 `;
 
 const StyledSwiper = styled(Swiper)`
-  margin-bottom: 40px;
+  padding-bottom: 40px;
+
+  .swiper-pagination-horizontal {
+    bottom: 20px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${({ theme }) => theme.colors.pink_100};
+  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -163,6 +188,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const Banner = styled.div`
+  position: relative;
   width: 100%;
   height: 200px;
   border-radius: 10px;
@@ -205,15 +231,34 @@ const BannerButton = styled.button`
   width: fit-content;
   padding: 1px 6px;
   border-radius: 20px;
-  color: ${({ theme }) => theme.colors.pink};
+  color: ${({ theme }) => theme.colors.pink_50};
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.pink};
+  border: 1px solid ${({ theme }) => theme.colors.pink_50};
   ${({ theme }) => theme.fonts.PRETENDARD_12_400};
 `;
 
 const BannerDate = styled.p`
   float: right;
   ${({ theme }) => theme.fonts.PRETENDARD_12_400};
+`;
+
+const BannerStatusLabel = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.pink_100};
+  ${({ theme }) => theme.fonts.PRETENDARD_12_600};
+
+  &.upcoming {
+    background-color: ${({ theme }) => theme.colors.pink_50};
+  }
+
+  &.ended {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
 `;
 
 const Contents = styled.div`
@@ -255,7 +300,7 @@ const ContentTitle = styled.p`
 
 const ContentText = styled.p`
   ${({ theme }) => theme.fonts.PRETENDARD_14_400};
-  color: ${({ theme }) => theme.colors.gray_100};
+  color: ${({ theme }) => theme.colors.gray_200};
 `;
 
 const ContentRight = styled.div`
