@@ -1,19 +1,49 @@
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState, useRef } from 'react';
 
 import 'swiper/css';
 
+const TAB_LIST = [
+  { id: 'chart', name: '차트' },
+  { id: 'whook', name: 'Whook' },
+  { id: 'event', name: '이벤트' },
+  { id: 'news', name: '뉴스' },
+  { id: 'store', name: '스토어' },
+  { id: 'charge', name: '충전소' },
+  { id: 'vote', name: '투표' },
+];
+
 function App() {
+  const [tab, setTab] = useState('chart');
+  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
+  const handleTabClick = (id: string) => {
+    setTab(id);
+    if (tabRefs.current[id]) {
+      tabRefs.current[id].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
+  };
+
   return (
     <Layout>
       <Tab>
-        <TabItem>차트</TabItem>
-        <TabItem>Whook</TabItem>
-        <TabItem>이벤트</TabItem>
-        <TabItem>뉴스</TabItem>
-        <TabItem>스토어</TabItem>
-        <TabItem>충전소</TabItem>
-        <TabItem>투표</TabItem>
+        {TAB_LIST.map((item) => (
+          <TabItem
+            key={item.id}
+            ref={(tabRef) => {
+              tabRefs.current[item.id] = tabRef;
+            }}
+            className={tab === item.id ? 'active' : ''}
+            onClick={() => handleTabClick(item.id)}
+          >
+            {item.name}
+          </TabItem>
+        ))}
       </Tab>
       <StyledSwiper spaceBetween={10} slidesPerView={1.2} centeredSlides={true} loop={true}>
         <StyledSwiperSlide>
@@ -120,7 +150,7 @@ const TabItem = styled.button`
 
   &.active {
     color: ${({ theme }) => theme.colors.white};
-    ${({ theme }) => theme.fonts.PRETENDARD_16_600};
+    font-weight: 600;
   }
 `;
 
