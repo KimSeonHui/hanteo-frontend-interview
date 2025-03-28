@@ -12,3 +12,12 @@ export type Banner = {
   url: string;
   status: BannerStatus;
 };
+
+export type Chart = {
+  id: number;
+  rank: number;
+  title: string;
+  artist: string;
+  favorite: number;
+  thumbnail: string;
+};

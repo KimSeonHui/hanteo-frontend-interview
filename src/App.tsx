@@ -1,12 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
-import type { Banner, BannerStatus, BannerType } from '@type';
+import type { Banner, BannerStatus, BannerType, Chart } from '@type';
 import { getBanners } from '@api/banner';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { getChart } from '@api/chart';
 
 const TAB_LIST = [
   { id: 'chart', name: '차트' },
@@ -21,7 +22,15 @@ const TAB_LIST = [
 function App() {
   const [tab, setTab] = useState('chart');
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
   const [banners, setBanners] = useState<Banner[]>([]);
+
+  const [chart, setChart] = useState<Chart[]>([]);
+  const [page, setPage] = useState(1);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastContentRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
   const handleTabClick = (id: string) => {
     setTab(id);
@@ -58,11 +67,58 @@ function App() {
     }
   };
 
+  const loadChart = useCallback(async () => {
+    if (isLoading || !hasMore) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    const PAGE_SIZE = 10;
+    const response = await getChart().then((data) => data.chart);
+    const startIndex = (page - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
+
+    const newChart = response.slice(startIndex, endIndex);
+
+    if (newChart.length === 0) {
+      setHasMore(false);
+      return;
+    }
+
+    setPage((prev) => prev + 1);
+    setChart((prev) => [...prev, ...newChart]);
+    setIsLoading(false);
+  }, [page]);
+
   useEffect(() => {
     getBanners().then((data) => {
       setBanners(data.banners);
     });
   }, []);
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadChart();
+        }
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+
+    if (lastContentRef.current) {
+      observer.current.observe(lastContentRef.current);
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [page]);
 
   return (
     <Layout>
@@ -113,21 +169,24 @@ function App() {
         </StyledSwiper>
       )}
       <Contents>
-        <Content>
-          <ContentLeft>
-            <ContentImage src="https://picsum.photos/200/200" alt="content" />
-            <ContentRank>1</ContentRank>
-            <ContentTextWrapper>
-              <ContentTitle>Dash</ContentTitle>
-              <ContentText>PLAVE(플레이브)</ContentText>
-            </ContentTextWrapper>
-          </ContentLeft>
-          <ContentRight>
-            <img src="/public/images/svg/favorite.svg" alt="favorite" />
-            <ContentText>79,568</ContentText>
-          </ContentRight>
-        </Content>
+        {chart.map((item) => (
+          <Content key={item.id}>
+            <ContentLeft>
+              <ContentImage src={item.thumbnail} alt="content" />
+              <ContentRank>{item.rank}</ContentRank>
+              <ContentTextWrapper>
+                <ContentTitle>{item.title}</ContentTitle>
+                <ContentText>{item.artist}</ContentText>
+              </ContentTextWrapper>
+            </ContentLeft>
+            <ContentRight>
+              <img src="/public/images/svg/favorite.svg" alt="favorite" />
+              <ContentText>{item.favorite}</ContentText>
+            </ContentRight>
+          </Content>
+        ))}
       </Contents>
+      <LastContent ref={lastContentRef} />
     </Layout>
   );
 }
@@ -135,6 +194,7 @@ function App() {
 export default App;
 
 const Layout = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   max-width: 768px;
@@ -271,6 +331,11 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 60px;
+  }
 `;
 
 const ContentLeft = styled.div`
@@ -307,4 +372,12 @@ const ContentRight = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+`;
+
+const LastContent = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
 `;
