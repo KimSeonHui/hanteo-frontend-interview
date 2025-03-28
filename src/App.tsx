@@ -1,86 +1,192 @@
+import { useState, useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import type { Banner, BannerStatus, BannerType, Chart } from '@type';
+import { getBanners } from '@api/banner';
 
 import 'swiper/css';
+import 'swiper/css/pagination';
+import { getChart } from '@api/chart';
+
+const TAB_LIST = [
+  { id: 'chart', name: '차트' },
+  { id: 'whook', name: 'Whook' },
+  { id: 'event', name: '이벤트' },
+  { id: 'news', name: '뉴스' },
+  { id: 'store', name: '스토어' },
+  { id: 'charge', name: '충전소' },
+  { id: 'vote', name: '투표' },
+];
 
 function App() {
+  const [tab, setTab] = useState('chart');
+  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+
+  const [banners, setBanners] = useState<Banner[]>([]);
+
+  const [chart, setChart] = useState<Chart[]>([]);
+  const [page, setPage] = useState(1);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastContentRef = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+
+  const handleTabClick = (id: string) => {
+    setTab(id);
+    if (tabRefs.current[id]) {
+      tabRefs.current[id].scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+        inline: 'center',
+      });
+    }
+  };
+
+  const handleBannerClick = (url: string) => {
+    window.open(url, '_blank');
+  };
+
+  const getBannerButtonText = (type: BannerType) => {
+    switch (type) {
+      case 'vote':
+        return '투표하기';
+      default:
+        return '신청하기';
+    }
+  };
+
+  const getBannerStatusLabel = (status: BannerStatus) => {
+    switch (status) {
+      case 'ongoing':
+        return '진행중';
+      case 'upcoming':
+        return '예정';
+      case 'ended':
+        return '종료';
+    }
+  };
+
+  const loadChart = useCallback(async () => {
+    if (isLoading || !hasMore) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    const PAGE_SIZE = 10;
+    const response = await getChart().then((data) => data.chart);
+    const startIndex = (page - 1) * PAGE_SIZE;
+    const endIndex = startIndex + PAGE_SIZE;
+
+    const newChart = response.slice(startIndex, endIndex);
+
+    if (newChart.length === 0) {
+      setHasMore(false);
+      return;
+    }
+
+    setPage((prev) => prev + 1);
+    setChart((prev) => [...prev, ...newChart]);
+    setIsLoading(false);
+  }, [page]);
+
+  useEffect(() => {
+    getBanners().then((data) => {
+      setBanners(data.banners);
+    });
+  }, []);
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadChart();
+        }
+      },
+      {
+        threshold: 0.5,
+      },
+    );
+
+    if (lastContentRef.current) {
+      observer.current.observe(lastContentRef.current);
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [page]);
+
   return (
     <Layout>
       <Tab>
-        <TabItem>차트</TabItem>
-        <TabItem>Whook</TabItem>
-        <TabItem>이벤트</TabItem>
-        <TabItem>뉴스</TabItem>
-        <TabItem>스토어</TabItem>
-        <TabItem>충전소</TabItem>
-        <TabItem>투표</TabItem>
+        {TAB_LIST.map((item) => (
+          <TabItem
+            key={item.id}
+            ref={(tabRef) => {
+              tabRefs.current[item.id] = tabRef;
+            }}
+            className={tab === item.id ? 'active' : ''}
+            onClick={() => handleTabClick(item.id)}
+          >
+            {item.name}
+          </TabItem>
+        ))}
       </Tab>
-      <StyledSwiper spaceBetween={10} slidesPerView={1.2} centeredSlides={true} loop={true}>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/200" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/300" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/400" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <Banner>
-            <BannerImage src="https://picsum.photos/200/500" alt="banner" />
-            <BannerContent>
-              <BannerTitleRow>
-                <BannerTitle>{`['SPECIAL STAGE/4K' PLAVE(플레이브) - Pink Venom (원곡 : BLACKPINK)]`}</BannerTitle>
-                <BannerButton>투표하기</BannerButton>
-              </BannerTitleRow>
-              <BannerDate>2025.03.27 ~ 2025.04.03(KST)</BannerDate>
-            </BannerContent>
-          </Banner>
-        </StyledSwiperSlide>
-      </StyledSwiper>
+      {banners.length > 0 && (
+        <StyledSwiper
+          spaceBetween={5}
+          slidesPerView={1.1}
+          centeredSlides={true}
+          loop
+          pagination
+          modules={[Pagination, Autoplay]}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+        >
+          {banners.map((banner) => (
+            <StyledSwiperSlide key={banner.id} onClick={() => handleBannerClick(banner.url)}>
+              <Banner>
+                <BannerStatusLabel className={banner.status}>{getBannerStatusLabel(banner.status)}</BannerStatusLabel>
+                <BannerImage src={banner.thumbnail} alt="banner" />
+                <BannerContent>
+                  <BannerTitleRow>
+                    <BannerTitle>{banner.title}</BannerTitle>
+                    <BannerButton>{getBannerButtonText(banner.type)}</BannerButton>
+                  </BannerTitleRow>
+                  <BannerDate>
+                    {banner.startDate} ~ {banner.endDate}(KST)
+                  </BannerDate>
+                </BannerContent>
+              </Banner>
+            </StyledSwiperSlide>
+          ))}
+        </StyledSwiper>
+      )}
       <Contents>
-        <Content>
-          <ContentLeft>
-            <ContentImage src="https://picsum.photos/200/200" alt="content" />
-            <ContentRank>1</ContentRank>
-            <ContentTextWrapper>
-              <ContentTitle>Dash</ContentTitle>
-              <ContentText>PLAVE(플레이브)</ContentText>
-            </ContentTextWrapper>
-          </ContentLeft>
-          <ContentRight>
-            <img src="/public/images/svg/favorite.svg" alt="favorite" />
-            <ContentText>79,568</ContentText>
-          </ContentRight>
-        </Content>
+        {chart.map((item) => (
+          <Content key={item.id}>
+            <ContentLeft>
+              <ContentImage src={item.thumbnail} alt="content" />
+              <ContentRank>{item.rank}</ContentRank>
+              <ContentTextWrapper>
+                <ContentTitle>{item.title}</ContentTitle>
+                <ContentText>{item.artist}</ContentText>
+              </ContentTextWrapper>
+            </ContentLeft>
+            <ContentRight>
+              <img src="/public/images/svg/favorite.svg" alt="favorite" />
+              <ContentText>{item.favorite}</ContentText>
+            </ContentRight>
+          </Content>
+        ))}
       </Contents>
+      <LastContent ref={lastContentRef} />
     </Layout>
   );
 }
@@ -88,6 +194,7 @@ function App() {
 export default App;
 
 const Layout = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   max-width: 768px;
@@ -102,7 +209,7 @@ const Tab = styled.ul`
   align-items: center;
   gap: 30px;
   padding: 15px 30px;
-  background-color: ${({ theme }) => theme.colors.pink};
+  background-color: ${({ theme }) => theme.colors.pink_50};
   overflow-x: auto;
   margin-bottom: 20px;
 
@@ -120,12 +227,20 @@ const TabItem = styled.button`
 
   &.active {
     color: ${({ theme }) => theme.colors.white};
-    ${({ theme }) => theme.fonts.PRETENDARD_16_600};
+    font-weight: 600;
   }
 `;
 
 const StyledSwiper = styled(Swiper)`
-  margin-bottom: 40px;
+  padding-bottom: 40px;
+
+  .swiper-pagination-horizontal {
+    bottom: 20px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: ${({ theme }) => theme.colors.pink_100};
+  }
 `;
 
 const StyledSwiperSlide = styled(SwiperSlide)`
@@ -133,6 +248,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
 `;
 
 const Banner = styled.div`
+  position: relative;
   width: 100%;
   height: 200px;
   border-radius: 10px;
@@ -175,15 +291,34 @@ const BannerButton = styled.button`
   width: fit-content;
   padding: 1px 6px;
   border-radius: 20px;
-  color: ${({ theme }) => theme.colors.pink};
+  color: ${({ theme }) => theme.colors.pink_50};
   background-color: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.pink};
+  border: 1px solid ${({ theme }) => theme.colors.pink_50};
   ${({ theme }) => theme.fonts.PRETENDARD_12_400};
 `;
 
 const BannerDate = styled.p`
   float: right;
   ${({ theme }) => theme.fonts.PRETENDARD_12_400};
+`;
+
+const BannerStatusLabel = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.pink_100};
+  ${({ theme }) => theme.fonts.PRETENDARD_12_600};
+
+  &.upcoming {
+    background-color: ${({ theme }) => theme.colors.pink_50};
+  }
+
+  &.ended {
+    background-color: ${({ theme }) => theme.colors.gray_100};
+  }
 `;
 
 const Contents = styled.div`
@@ -196,6 +331,11 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 60px;
+  }
 `;
 
 const ContentLeft = styled.div`
@@ -225,11 +365,19 @@ const ContentTitle = styled.p`
 
 const ContentText = styled.p`
   ${({ theme }) => theme.fonts.PRETENDARD_14_400};
-  color: ${({ theme }) => theme.colors.gray_100};
+  color: ${({ theme }) => theme.colors.gray_200};
 `;
 
 const ContentRight = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+`;
+
+const LastContent = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
 `;
