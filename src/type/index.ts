@@ -1,17 +1,6 @@
-export type BannerStatus = 'ongoing' | 'upcoming' | 'ended';
+export type EventStatus = 'ongoing' | 'upcoming' | 'ended';
 
-export type BannerType = 'fan-signing' | 'fan-meeting' | 'showcase' | 'vote';
-
-export type Banner = {
-  id: number;
-  title: string;
-  startDate: string;
-  endDate: string;
-  type: BannerType;
-  thumbnail: string;
-  url: string;
-  status: BannerStatus;
-};
+export type EventType = 'fan-club' | 'showcase' | 'vote' | 'fan-meeting';
 
 export type Chart = {
   id: number;
@@ -20,4 +9,15 @@ export type Chart = {
   artist: string;
   favorite: number;
   thumbnail: string;
+};
+
+export type Event = {
+  id: number;
+  title: string;
+  startDate: string;
+  endDate: string;
+  type: EventType;
+  thumbnail: string;
+  url: string;
+  status: EventStatus;
 };
