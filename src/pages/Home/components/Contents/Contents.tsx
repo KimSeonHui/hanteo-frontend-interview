@@ -1,48 +1,42 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { getChart } from '@api/chart';
 import { Chart } from '@type';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const PAGE_SIZE = 10;
 
 const Contents = () => {
   const [chart, setChart] = useState<Chart[]>([]);
-  const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastContentRef = useRef<HTMLDivElement>(null);
 
-  const loadChart = useCallback(async () => {
-    if (isLoading || !hasMore) {
-      return;
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+    queryKey: ['chart'],
+    queryFn: ({ pageParam }) => getChart(pageParam, PAGE_SIZE),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.chart.length > 0 ? allPages.length + 1 : undefined;
+    },
+    maxPages: 10,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 5,
+  });
+
+  useEffect(() => {
+    if (data) {
+      const newChart = data.pages.flatMap((page) => page.chart);
+      setChart(newChart);
     }
-
-    setIsLoading(true);
-
-    const response = await getChart().then((data) => data.chart);
-    const startIndex = (page - 1) * PAGE_SIZE;
-    const endIndex = startIndex + PAGE_SIZE;
-
-    const newChart = response.slice(startIndex, endIndex);
-
-    if (newChart.length === 0) {
-      setHasMore(false);
-      return;
-    }
-
-    setPage((prev) => prev + 1);
-    setChart((prev) => [...prev, ...newChart]);
-    setIsLoading(false);
-  }, [page]);
+  }, [data]);
 
   useEffect(() => {
     observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach(async (entry) => {
-          if (entry.isIntersecting) {
-            await loadChart();
+          if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
           }
         });
       },
@@ -60,7 +54,7 @@ const Contents = () => {
         observer.current.disconnect();
       }
     };
-  }, [page]);
+  }, [hasNextPage, isFetchingNextPage]);
 
   return (
     <>
@@ -81,8 +75,7 @@ const Contents = () => {
             </ContentRight>
           </Content>
         ))}
-        {isLoading &&
-          hasMore &&
+        {(isFetchingNextPage || chart.length === 0) &&
           Array.from({ length: 10 }).map((_, index) => (
             <Content key={index}>
               <ContentLeft>
