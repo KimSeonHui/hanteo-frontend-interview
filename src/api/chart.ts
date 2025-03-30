@@ -12,6 +12,6 @@ export const getChart = async (page: number, pageSize: number) => {
       const chart = data.chart.slice(startIndex, endIndex);
 
       resolve({ chart });
-    }, 3000);
+    }, 1000); // 테스트를 위한 딜레이 추가
   });
 };
