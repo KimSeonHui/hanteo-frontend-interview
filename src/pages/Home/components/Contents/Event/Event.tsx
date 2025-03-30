@@ -1,16 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import type { EventStatus, EventType, Event } from '@type';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getEvents } from '@api/event';
+import useInfiniteScrollObserver from '../hooks/useInfiniteScrollObserver';
 
 const PAGE_SIZE = 5;
 
 const Event = () => {
   const [events, setEvents] = useState<Event[]>([]);
-
-  const observer = useRef<IntersectionObserver | null>(null);
-  const lastContentRef = useRef<HTMLDivElement>(null);
 
   const { data, hasNextPage, isFetchingNextPage, fetchNextPage } = useInfiniteQuery({
     queryKey: ['events'],
@@ -20,8 +18,24 @@ const Event = () => {
       return lastPage.events.length > 0 ? allPages.length + 1 : undefined;
     },
     staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 5,
+    maxPages: 10,
   });
+
+  const { lastContentRef } = useInfiniteScrollObserver(
+    useCallback(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(async (entry) => {
+          if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+          }
+        });
+      },
+      [hasNextPage, isFetchingNextPage, fetchNextPage],
+    ),
+    {
+      threshold: 0.7,
+    },
+  );
 
   const getEventButtonText = (type: EventType) => {
     switch (type) {
@@ -49,31 +63,6 @@ const Event = () => {
       setEvents(newEvents);
     }
   }, [data]);
-
-  useEffect(() => {
-    observer.current = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(async (entry) => {
-          if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
-            fetchNextPage();
-          }
-        });
-      },
-      {
-        threshold: 0.7,
-      },
-    );
-
-    if (lastContentRef.current) {
-      observer.current.observe(lastContentRef.current);
-    }
-
-    return () => {
-      if (observer.current) {
-        observer.current.disconnect();
-      }
-    };
-  }, [hasNextPage, isFetchingNextPage]);
 
   return (
     <>
