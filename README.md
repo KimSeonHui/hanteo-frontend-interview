@@ -1,54 +1,30 @@
-# React + TypeScript + Vite
+# 한터차트 프론트엔드 인터뷰 프로젝트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 구현 기능
 
-Currently, two official plugins are available:
+### 핵심 기능
+- 좌우 슬라이드를 통한 카테고리 네비게이션
+- 무한 루프 슬라이드형 배너 (Swiper.js 활용)
+- 선택한 카테고리별 리스트 형식의 컨텐츠 표시
+- 컨텐츠 영역 무한 스크롤 구현
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 성능 최적화
+- 카테고리별 컨텐츠 데이터 로딩 시 스켈레톤 UI 적용
+- React Query를 활용한 데이터 캐싱 및 상태 관리
+- WebP 이미지 포맷을 활용한 이미지 최적화
 
-## Expanding the ESLint configuration
+## 기술 스택
+- React
+- TypeScript
+- Styled Components
+- React Query
+- Swiper.js (슬라이드 구현)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 프로젝트 구조
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+src/
+├── api/          # API 통신 관련 함수
+├── pages/        # 페이지 컴포넌트
+├── styles/       # 전역 스타일
+└── type/         # TypeScript 타입 정의
 ```
