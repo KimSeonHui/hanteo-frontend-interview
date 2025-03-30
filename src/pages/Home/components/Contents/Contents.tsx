@@ -1,7 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { getChart } from '@api/chart';
 import { Chart } from '@type';
+
+const PAGE_SIZE = 10;
 
 const Contents = () => {
   const [chart, setChart] = useState<Chart[]>([]);
@@ -19,7 +21,6 @@ const Contents = () => {
 
     setIsLoading(true);
 
-    const PAGE_SIZE = 10;
     const response = await getChart().then((data) => data.chart);
     const startIndex = (page - 1) * PAGE_SIZE;
     const endIndex = startIndex + PAGE_SIZE;
@@ -39,9 +40,11 @@ const Contents = () => {
   useEffect(() => {
     observer.current = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
-          loadChart();
-        }
+        entries.forEach(async (entry) => {
+          if (entry.isIntersecting) {
+            await loadChart();
+          }
+        });
       },
       {
         threshold: 0.5,
@@ -65,7 +68,7 @@ const Contents = () => {
         {chart.map((item) => (
           <Content key={item.id}>
             <ContentLeft>
-              <ContentImage src={item.thumbnail} alt="content" />
+              <ContentImage src={item.thumbnail} alt="content" onLoad={(e) => {}} />
               <ContentRank>{item.rank}</ContentRank>
               <ContentTextWrapper>
                 <ContentTitle>{item.title}</ContentTitle>
@@ -78,6 +81,19 @@ const Contents = () => {
             </ContentRight>
           </Content>
         ))}
+        {isLoading &&
+          hasMore &&
+          Array.from({ length: 10 }).map((_, index) => (
+            <Content key={index}>
+              <ContentLeft>
+                <SkeletonImage />
+                <ContentTextWrapper>
+                  <SkeletonText />
+                  <SkeletonText className="short" />
+                </ContentTextWrapper>
+              </ContentLeft>
+            </Content>
+          ))}
       </StyledContents>
       <LastContent ref={lastContentRef} />
     </>
@@ -88,6 +104,7 @@ export default Contents;
 
 const StyledContents = styled.div`
   width: 100%;
+  min-height: 680px;
   padding: 0 20px;
 `;
 
@@ -145,4 +162,38 @@ const LastContent = styled.div`
   left: 0;
   width: 100%;
   height: 50px;
+`;
+
+const skeletonGradient = keyframes`
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.3;
+  }
+`;
+
+const SkeletonImage = styled.div`
+  width: 50px;
+  height: 50px;
+  background-color: ${({ theme }) => theme.colors.gray_100};
+  animation: ${skeletonGradient} 2.5s infinite;
+  border-radius: 10px;
+  border: none;
+`;
+
+const SkeletonText = styled(ContentText)`
+  width: 100px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.colors.gray_100};
+  animation: ${skeletonGradient} 2.5s infinite;
+  margin-bottom: 10px;
+
+  &.short {
+    width: 30px;
+  }
 `;
