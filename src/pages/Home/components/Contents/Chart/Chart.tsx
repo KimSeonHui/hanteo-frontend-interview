@@ -50,9 +50,9 @@ const Chart = () => {
         <Content key={item.id}>
           <ContentLeft>
             <picture>
-              <source srcSet={`${item.thumbnail}.webp`} type="image/webp" />
-              <source srcSet={`${item.thumbnail}.jpg`} type="image/jpeg" />
-              <ContentImage src={`${item.thumbnail}.jpg`} alt="content" width={50} height={50} />
+              <source srcSet={`${item.thumbnail}.webp?random=${item.id}`} type="image/webp" />
+              <source srcSet={`${item.thumbnail}.jpg?random=${item.id}`} type="image/jpeg" />
+              <ContentImage src={`${item.thumbnail}.jpg?random=${item.id}`} alt="content" width={50} height={50} />
             </picture>
             <ContentRank>{item.rank}</ContentRank>
             <ContentTextWrapper>
