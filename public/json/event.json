@@ -1,0 +1,154 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "가요대제전 투표 이벤트",
+      "startDate": "2025-03-20",
+      "endDate": "2025-04-20",
+      "type": "vote",
+      "thumbnail": "https://picsum.photos/360/130?id=1",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 2,
+      "title": "PLAVE 공식 팬클럽 플리 2기 공개모집",
+      "startDate": "2025-03-30",
+      "endDate": "2025-04-30",
+      "type": "fan-club",
+      "thumbnail": "https://picsum.photos/360/130?id=2",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 3,
+      "title": "aespa 미니앨범 발매 기념 쇼케이스",
+      "startDate": "2025-04-25",
+      "endDate": "2025-04-25",
+      "type": "showcase",
+      "thumbnail": "https://picsum.photos/360/130?id=3",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 4,
+      "title": "SEVENTEEN 팬미팅 'GOING SEVENTEEN'",
+      "startDate": "2025-02-15",
+      "endDate": "2025-03-15",
+      "type": "fan-meeting",
+      "thumbnail": "https://picsum.photos/360/130?id=4",
+      "url": "https://www.hanteochart.com/",
+      "status": "ended"
+    },
+    {
+      "id": 5,
+      "title": "NewJeans 첫 팬미팅 'Bunnies Day'",
+      "startDate": "2025-04-01",
+      "endDate": "2025-04-01",
+      "type": "fan-meeting",
+      "thumbnail": "https://picsum.photos/360/130?id=5",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 6,
+      "title": "LE SSERAFIM 팬클럽 1기 모집",
+      "startDate": "2025-03-25",
+      "endDate": "2025-04-10",
+      "type": "fan-club",
+      "thumbnail": "https://picsum.photos/360/130?id=6",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 7,
+      "title": "IVE 신곡 쇼케이스",
+      "startDate": "2025-05-01",
+      "endDate": "2025-05-15",
+      "type": "showcase",
+      "thumbnail": "https://picsum.photos/360/130?id=7",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 8,
+      "title": "2025 상반기 최고의 앨범 투표",
+      "startDate": "2025-03-01",
+      "endDate": "2025-03-31",
+      "type": "vote",
+      "thumbnail": "https://picsum.photos/360/130?id=8",
+      "url": "https://www.hanteochart.com/",
+      "status": "ended"
+    },
+    {
+      "id": 9,
+      "title": "(G)I-DLE 팬클럽 2기 모집",
+      "startDate": "2025-04-15",
+      "endDate": "2025-05-15",
+      "type": "fan-club",
+      "thumbnail": "https://picsum.photos/360/130?id=9",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 10,
+      "title": "BLACKPINK 글로벌 팬미팅",
+      "startDate": "2025-04-20",
+      "endDate": "2025-04-20",
+      "type": "fan-meeting",
+      "thumbnail": "https://picsum.photos/360/130?id=10",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 11,
+      "title": "TWICE 월간 최고의 아티스트 투표",
+      "startDate": "2025-03-15",
+      "endDate": "2025-04-15",
+      "type": "vote",
+      "thumbnail": "https://picsum.photos/360/130?id=11",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    },
+    {
+      "id": 12,
+      "title": "Red Velvet 컴백 쇼케이스",
+      "startDate": "2025-05-10",
+      "endDate": "2025-05-10",
+      "type": "showcase",
+      "thumbnail": "https://picsum.photos/360/130?id=12",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 13,
+      "title": "NCT DREAM 팬클럽 신규 모집",
+      "startDate": "2025-03-10",
+      "endDate": "2025-03-20",
+      "type": "fan-club",
+      "thumbnail": "https://picsum.photos/360/130?id=13",
+      "url": "https://www.hanteochart.com/",
+      "status": "ended"
+    },
+    {
+      "id": 14,
+      "title": "STAYC 글로벌 팬미팅",
+      "startDate": "2025-04-30",
+      "endDate": "2025-04-30",
+      "type": "fan-meeting",
+      "thumbnail": "https://picsum.photos/360/130?id=14",
+      "url": "https://www.hanteochart.com/",
+      "status": "upcoming"
+    },
+    {
+      "id": 15,
+      "title": "EXO 신곡 쇼케이스",
+      "startDate": "2025-04-08",
+      "endDate": "2025-04-14",
+      "type": "showcase",
+      "thumbnail": "https://picsum.photos/360/130?id=15",
+      "url": "https://www.hanteochart.com/",
+      "status": "ongoing"
+    }
+  ]
+}

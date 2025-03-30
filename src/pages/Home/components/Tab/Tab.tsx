@@ -11,8 +11,12 @@ const TAB_LIST = [
   { id: 'vote', name: '투표' },
 ];
 
-const Tab = () => {
-  const [tab, setTab] = useState('chart');
+interface Props {
+  tab: string;
+  setTab: (tab: string) => void;
+}
+
+const Tab = ({ tab, setTab }: Props) => {
   const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
 
   const handleTabClick = (id: string) => {

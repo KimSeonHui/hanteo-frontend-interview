@@ -6,7 +6,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import type { Banner, BannerStatus, BannerType } from '@type';
+import type { Event as Banner, EventStatus as BannerStatus, EventType as BannerType } from '@type';
 import { getBanners } from '@api/banner';
 
 const Banner = () => {
@@ -82,6 +82,7 @@ export default Banner;
 
 const StyledSwiper = styled(Swiper)`
   padding-bottom: 40px;
+  margin-bottom: 30px;
 
   .swiper-pagination-horizontal {
     bottom: 20px;

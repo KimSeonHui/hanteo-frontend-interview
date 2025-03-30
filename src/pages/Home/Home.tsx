@@ -2,13 +2,16 @@ import styled from 'styled-components';
 import Tab from './components/Tab/Tab';
 import Banner from './components/Banner/Banner';
 import Contents from './components/Contents/Contents';
+import { useState } from 'react';
 
 const Home = () => {
+  const [tab, setTab] = useState('chart');
+
   return (
     <Layout>
-      <Tab />
+      <Tab tab={tab} setTab={setTab} />
       <Banner />
-      <Contents />
+      <Contents tab={tab} />
     </Layout>
   );
 };
