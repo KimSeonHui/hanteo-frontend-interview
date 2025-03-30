@@ -70,9 +70,9 @@ const Event = () => {
         <StyledEvent key={event.id}>
           <EventStatusLabel className={event.status}>{getEventStatusLabel(event.status)}</EventStatusLabel>
           <picture>
-            <source srcSet={`${event.thumbnail}.webp`} type="image/webp" />
-            <source srcSet={`${event.thumbnail}.jpg`} type="image/jpeg" />
-            <EventImage src={`${event.thumbnail}.jpg`} alt="banner" />
+            <source srcSet={`${event.thumbnail}.webp?random=${event.id}`} type="image/webp" />
+            <source srcSet={`${event.thumbnail}.jpg?random=${event.id}`} type="image/jpeg" />
+            <EventImage src={`${event.thumbnail}.jpg?random=${event.id}`} alt="banner" />
           </picture>
           <EventContent>
             <EventTitleRow>

@@ -60,7 +60,11 @@ const Banner = () => {
           <StyledSwiperSlide key={banner.id} onClick={() => handleBannerClick(banner.url)}>
             <StyledBanner>
               <BannerStatusLabel className={banner.status}>{getBannerStatusLabel(banner.status)}</BannerStatusLabel>
-              <BannerImage src={banner.thumbnail} alt="banner" />
+              <picture>
+                <source srcSet={`${banner.thumbnail}.webp?random=${banner.id}`} type="image/webp" />
+                <source srcSet={`${banner.thumbnail}.jpg?random=${banner.id}`} type="image/jpeg" />
+                <BannerImage src={`${banner.thumbnail}.jpg?random=${banner.id}`} alt="banner" />
+              </picture>
               <BannerContent>
                 <BannerTitleRow>
                   <BannerTitle>{banner.title}</BannerTitle>

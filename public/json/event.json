@@ -6,7 +6,7 @@
       "startDate": "2025-03-20",
       "endDate": "2025-04-20",
       "type": "vote",
-      "thumbnail": "https://picsum.photos/360/130?id=1",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ongoing"
     },
@@ -16,7 +16,7 @@
       "startDate": "2025-03-30",
       "endDate": "2025-04-30",
       "type": "fan-club",
-      "thumbnail": "https://picsum.photos/360/130?id=2",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ongoing"
     },
@@ -26,7 +26,7 @@
       "startDate": "2025-04-25",
       "endDate": "2025-04-25",
       "type": "showcase",
-      "thumbnail": "https://picsum.photos/360/130?id=3",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -36,7 +36,7 @@
       "startDate": "2025-02-15",
       "endDate": "2025-03-15",
       "type": "fan-meeting",
-      "thumbnail": "https://picsum.photos/360/130?id=4",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ended"
     },
@@ -46,7 +46,7 @@
       "startDate": "2025-04-01",
       "endDate": "2025-04-01",
       "type": "fan-meeting",
-      "thumbnail": "https://picsum.photos/360/130?id=5",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -56,7 +56,7 @@
       "startDate": "2025-03-25",
       "endDate": "2025-04-10",
       "type": "fan-club",
-      "thumbnail": "https://picsum.photos/360/130?id=6",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ongoing"
     },
@@ -66,7 +66,7 @@
       "startDate": "2025-05-01",
       "endDate": "2025-05-15",
       "type": "showcase",
-      "thumbnail": "https://picsum.photos/360/130?id=7",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -76,7 +76,7 @@
       "startDate": "2025-03-01",
       "endDate": "2025-03-31",
       "type": "vote",
-      "thumbnail": "https://picsum.photos/360/130?id=8",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ended"
     },
@@ -86,7 +86,7 @@
       "startDate": "2025-04-15",
       "endDate": "2025-05-15",
       "type": "fan-club",
-      "thumbnail": "https://picsum.photos/360/130?id=9",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -96,7 +96,7 @@
       "startDate": "2025-04-20",
       "endDate": "2025-04-20",
       "type": "fan-meeting",
-      "thumbnail": "https://picsum.photos/360/130?id=10",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -106,7 +106,7 @@
       "startDate": "2025-03-15",
       "endDate": "2025-04-15",
       "type": "vote",
-      "thumbnail": "https://picsum.photos/360/130?id=11",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ongoing"
     },
@@ -116,7 +116,7 @@
       "startDate": "2025-05-10",
       "endDate": "2025-05-10",
       "type": "showcase",
-      "thumbnail": "https://picsum.photos/360/130?id=12",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -126,7 +126,7 @@
       "startDate": "2025-03-10",
       "endDate": "2025-03-20",
       "type": "fan-club",
-      "thumbnail": "https://picsum.photos/360/130?id=13",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ended"
     },
@@ -136,7 +136,7 @@
       "startDate": "2025-04-30",
       "endDate": "2025-04-30",
       "type": "fan-meeting",
-      "thumbnail": "https://picsum.photos/360/130?id=14",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "upcoming"
     },
@@ -146,7 +146,7 @@
       "startDate": "2025-04-08",
       "endDate": "2025-04-14",
       "type": "showcase",
-      "thumbnail": "https://picsum.photos/360/130?id=15",
+      "thumbnail": "https://picsum.photos/360/130",
       "url": "https://www.hanteochart.com/",
       "status": "ongoing"
     }
