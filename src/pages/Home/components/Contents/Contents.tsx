@@ -62,7 +62,11 @@ const Contents = () => {
         {chart.map((item) => (
           <Content key={item.id}>
             <ContentLeft>
-              <ContentImage src={item.thumbnail} alt="content" onLoad={(e) => {}} />
+              <picture>
+                <source srcSet={`${item.thumbnail}.webp`} type="image/webp" />
+                <source srcSet={`${item.thumbnail}.jpg`} type="image/jpeg" />
+                <ContentImage src={`${item.thumbnail}.jpg`} alt="content" width={50} height={50} />
+              </picture>
               <ContentRank>{item.rank}</ContentRank>
               <ContentTextWrapper>
                 <ContentTitle>{item.title}</ContentTitle>
