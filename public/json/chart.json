@@ -1,0 +1,484 @@
+{
+  "chart": [
+    {
+      "id": 1,
+      "rank": 1,
+      "title": "Dash",
+      "artist": "PLAVE(플레이브)",
+      "favorite": 48765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 2,
+      "rank": 2,
+      "title": "Perfect Night",
+      "artist": "LE SSERAFIM",
+      "favorite": 45678,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 3,
+      "rank": 3,
+      "title": "Drama",
+      "artist": "aespa",
+      "favorite": 42345,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 4,
+      "rank": 4,
+      "title": "Seven (feat. Latto)",
+      "artist": "정국",
+      "favorite": 41234,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 5,
+      "rank": 5,
+      "title": "Super Shy",
+      "artist": "NewJeans",
+      "favorite": 39876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 6,
+      "rank": 6,
+      "title": "Baddie",
+      "artist": "IVE",
+      "favorite": 38765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 7,
+      "rank": 7,
+      "title": "Standing Next to You",
+      "artist": "정국",
+      "favorite": 37654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 8,
+      "rank": 8,
+      "title": "Queencard",
+      "artist": "(G)I-DLE",
+      "favorite": 36543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 9,
+      "rank": 9,
+      "title": "ETA",
+      "artist": "NewJeans",
+      "favorite": 35432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 10,
+      "rank": 10,
+      "title": "Fast Forward",
+      "artist": "전소미",
+      "favorite": 34321,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 11,
+      "rank": 11,
+      "title": "UNFORGIVEN (feat. Nile Rodgers)",
+      "artist": "LE SSERAFIM",
+      "favorite": 33210,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 12,
+      "rank": 12,
+      "title": "Spicy",
+      "artist": "aespa",
+      "favorite": 32109,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 13,
+      "rank": 13,
+      "title": "Ditto",
+      "artist": "NewJeans",
+      "favorite": 31098,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 14,
+      "rank": 14,
+      "title": "After LIKE",
+      "artist": "IVE",
+      "favorite": 30987,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 15,
+      "rank": 15,
+      "title": "Hype Boy",
+      "artist": "NewJeans",
+      "favorite": 29876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 16,
+      "rank": 16,
+      "title": "ANTIFRAGILE",
+      "artist": "LE SSERAFIM",
+      "favorite": 28765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 17,
+      "rank": 17,
+      "title": "Cupid",
+      "artist": "FIFTY FIFTY",
+      "favorite": 27654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 18,
+      "rank": 18,
+      "title": "Kitsch",
+      "artist": "IVE",
+      "favorite": 26543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 19,
+      "rank": 19,
+      "title": "OMG",
+      "artist": "NewJeans",
+      "favorite": 25432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 20,
+      "rank": 20,
+      "title": "Smoke",
+      "artist": "다이나믹 듀오",
+      "favorite": 24321,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 21,
+      "rank": 21,
+      "title": "Polaroid",
+      "artist": "임영웅",
+      "favorite": 23210,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 22,
+      "rank": 22,
+      "title": "Love Lee",
+      "artist": "AKMU",
+      "favorite": 22109,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 23,
+      "rank": 23,
+      "title": "Steal The Show",
+      "artist": "Lauv",
+      "favorite": 21098,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 24,
+      "rank": 24,
+      "title": "I AM",
+      "artist": "IVE",
+      "favorite": 20987,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 25,
+      "rank": 25,
+      "title": "Dreamers",
+      "artist": "정국",
+      "favorite": 19876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 26,
+      "rank": 26,
+      "title": "사건의 지평선",
+      "artist": "윤하",
+      "favorite": 18765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 27,
+      "rank": 27,
+      "title": "Attention",
+      "artist": "NewJeans",
+      "favorite": 17654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 28,
+      "rank": 28,
+      "title": "Nxde",
+      "artist": "(G)I-DLE",
+      "favorite": 16543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 29,
+      "rank": 29,
+      "title": "CHRISTIAN",
+      "artist": "Zico",
+      "favorite": 15432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 30,
+      "rank": 30,
+      "title": "Candy",
+      "artist": "NCT DREAM",
+      "favorite": 14321,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 31,
+      "rank": 31,
+      "title": "Dash",
+      "artist": "PLAVE(플레이브)",
+      "favorite": 48765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 32,
+      "rank": 32,
+      "title": "Perfect Night",
+      "artist": "LE SSERAFIM",
+      "favorite": 45678,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 33,
+      "rank": 33,
+      "title": "Drama",
+      "artist": "aespa",
+      "favorite": 42345,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 34,
+      "rank": 34,
+      "title": "Seven (feat. Latto)",
+      "artist": "정국",
+      "favorite": 41234,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 35,
+      "rank": 35,
+      "title": "Super Shy",
+      "artist": "NewJeans",
+      "favorite": 39876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 36,
+      "rank": 36,
+      "title": "Baddie",
+      "artist": "IVE",
+      "favorite": 38765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 37,
+      "rank": 37,
+      "title": "Standing Next to You",
+      "artist": "정국",
+      "favorite": 37654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 38,
+      "rank": 38,
+      "title": "Queencard",
+      "artist": "(G)I-DLE",
+      "favorite": 36543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 39,
+      "rank": 39,
+      "title": "ETA",
+      "artist": "NewJeans",
+      "favorite": 35432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 40,
+      "rank": 40,
+      "title": "Fast Forward",
+      "artist": "전소미",
+      "favorite": 34321,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 41,
+      "rank": 41,
+      "title": "UNFORGIVEN (feat. Nile Rodgers)",
+      "artist": "LE SSERAFIM",
+      "favorite": 33210,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 42,
+      "rank": 42,
+      "title": "Spicy",
+      "artist": "aespa",
+      "favorite": 32109,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 43,
+      "rank": 43,
+      "title": "Ditto",
+      "artist": "NewJeans",
+      "favorite": 31098,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 44,
+      "rank": 44,
+      "title": "After LIKE",
+      "artist": "IVE",
+      "favorite": 30987,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 45,
+      "rank": 45,
+      "title": "Hype Boy",
+      "artist": "NewJeans",
+      "favorite": 29876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 46,
+      "rank": 46,
+      "title": "ANTIFRAGILE",
+      "artist": "LE SSERAFIM",
+      "favorite": 28765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 47,
+      "rank": 47,
+      "title": "Cupid",
+      "artist": "FIFTY FIFTY",
+      "favorite": 27654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 48,
+      "rank": 48,
+      "title": "Kitsch",
+      "artist": "IVE",
+      "favorite": 26543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 49,
+      "rank": 49,
+      "title": "OMG",
+      "artist": "NewJeans",
+      "favorite": 25432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 50,
+      "rank": 50,
+      "title": "Smoke",
+      "artist": "다이나믹 듀오",
+      "favorite": 24321,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 51,
+      "rank": 51,
+      "title": "Polaroid",
+      "artist": "임영웅",
+      "favorite": 23210,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 52,
+      "rank": 52,
+      "title": "Love Lee",
+      "artist": "AKMU",
+      "favorite": 22109,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 53,
+      "rank": 53,
+      "title": "Steal The Show",
+      "artist": "Lauv",
+      "favorite": 21098,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 54,
+      "rank": 54,
+      "title": "I AM",
+      "artist": "IVE",
+      "favorite": 20987,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 55,
+      "rank": 55,
+      "title": "Dreamers",
+      "artist": "정국",
+      "favorite": 19876,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 56,
+      "rank": 56,
+      "title": "사건의 지평선",
+      "artist": "윤하",
+      "favorite": 18765,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 57,
+      "rank": 57,
+      "title": "Attention",
+      "artist": "NewJeans",
+      "favorite": 17654,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 58,
+      "rank": 58,
+      "title": "Nxde",
+      "artist": "(G)I-DLE",
+      "favorite": 16543,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 59,
+      "rank": 59,
+      "title": "CHRISTIAN",
+      "artist": "Zico",
+      "favorite": 15432,
+      "thumbnail": "https://picsum.photos/50/50"
+    },
+    {
+      "id": 60,
+      "rank": 60,
+      "title": "Candy",
+      "artist": "NCT DREAM",
+      "favorite": 14321,
+      "thumbnail": "https://picsum.photos/50/50"
+    }
+  ]
+}
