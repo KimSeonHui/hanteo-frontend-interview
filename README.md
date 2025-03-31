@@ -18,7 +18,6 @@
 - TypeScript
 - Styled Components
 - React Query
-- Swiper.js (슬라이드 구현)
 
 ## 프로젝트 구조
 ```
